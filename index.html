@@ -1,109 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coffee Rush</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coffee Rush</title>
 
-  
 <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-  <main class="app">
-    <header>☕ COFFEE RUSH</header>
+<main class="app">
+<header>☕ COFFEE RUSH</header>
 
-    <section id="startScreen" class="screen">
-      <div class="center">
-        <div class="big-icon">☕</div>
-        <h1>Welcome to Coffee Rush!</h1>
-        <p>Serve the correct drink or meal before time runs out!</p>
+<section id="startScreen" class="screen">
+<div class="center">
+<div class="big-icon">☕</div>
+<h1>Welcome to Coffee Rush!</h1>
+<p>Serve the correct drink or meal before time runs out!</p>
+<div class="card">
+<h2>How to play</h2>
+<p>Correct order: <b>+10 points</b></p>
+<p>Wrong order: <b>-5 points</b></p>
+<p>Every five orders: <b>+20 bonus points</b></p>
+<p>You have <b>60 seconds</b>!</p>
+</div>
+<button class="start-button" onclick="startGame()">START GAME</button>
+</div>
+</section>
 
-        <div class="card">
-          <h2>How to play</h2>
-          <p>Correct order: <b>+10 points</b></p>
-          <p>Wrong order: <b>-5 points</b></p>
-          <p>Every five orders: <b>+20 bonus points</b></p>
-          <p>You have <b>60 seconds</b>!</p>
-        </div>
+<section id="gameScreen" class="screen hidden">
+<div class="stats">
+<div class="stat"><span class="stat-title">SCORE</span><span id="score" class="stat-value">0</span></div>
+<div class="stat"><span class="stat-title">TIME</span><span id="time" class="stat-value">60</span></div>
+<div class="stat"><span class="stat-title">ORDERS</span><span id="orders" class="stat-value">0</span></div>
+</div>
 
-        <button class="start-button" onclick="startGame()">START GAME</button>
-      </div>
-    </section>
+<div class="cafe-title">☕ CAFÉ RUSH CAFÉ</div>
+<div class="chef">👩‍🍳</div>
+<div class="customer-label">Customer</div>
 
-    <section id="gameScreen" class="screen hidden">
-      <div class="stats">
-        <div class="stat">
-          <span class="stat-title">SCORE</span>
-          <span id="score" class="stat-value">0</span>
-        </div>
-        <div class="stat">
-          <span class="stat-title">TIME</span>
-          <span id="time" class="stat-value">60</span>
-        </div>
-        <div class="stat">
-          <span class="stat-title">ORDERS</span>
-          <span id="orders" class="stat-value">0</span>
-        </div>
-      </div>
+<div class="order">
+<span id="orderIcon">☕</span>
+I would like a <span id="orderName">Latte</span>, please!
+</div>
 
-      <div class="cafe-title">☕ CAFÉ RUSH CAFÉ</div>
-      <div class="chef">👩‍🍳</div>
-      <div class="customer-label">Customer</div>
+<div id="message" class="message">Serve the customer!</div>
+<p class="center">Choose the correct item:</p>
 
-      <div class="order">
-        <span id="orderIcon">☕</span>
-        I would like a <span id="orderName">Latte</span>, please!
-      </div>
+<div class="menu">
+<button class="item espresso" onclick="chooseItem('Espresso')"><span class="item-icon">☕</span>Espresso</button>
+<button class="item cappuccino" onclick="chooseItem('Cappuccino')"><span class="item-icon">🥤</span>Cappuccino</button>
+<button class="item latte" onclick="chooseItem('Latte')"><span class="item-icon">🫖</span>Latte</button>
+<button class="item mocha" onclick="chooseItem('Mocha')"><span class="item-icon">🍫</span>Mocha</button>
+<button class="item croissant" onclick="chooseItem('Croissant')"><span class="item-icon">🥐</span>Croissant</button>
+<button class="item cheesecake" onclick="chooseItem('Cheesecake')"><span class="item-icon">🍰</span>Cheesecake</button>
+</div>
+</section>
 
-      <div id="message" class="message">Serve the customer!</div>
+<section id="gameOverScreen" class="screen hidden">
+<div class="center">
+<div class="big-icon">🏆</div>
+<h1>GAME OVER</h1>
+<div class="card">
+<h2>FINAL SCORE</h2>
+<div id="finalScore" class="final-score">0</div>
+<p>Orders completed: <b id="finalOrders">0</b></p>
+</div>
+<button class="again-button" onclick="startGame()">PLAY AGAIN</button>
+</div>
+</section>
+</main>
 
-      <p class="center">Choose the correct item:</p>
-
-      <div class="menu">
-        <button class="item espresso" onclick="chooseItem('Espresso')">
-          <span class="item-icon">☕</span>Espresso
-        </button>
-
-        <button class="item cappuccino" onclick="chooseItem('Cappuccino')">
-          <span class="item-icon">🥤</span>Cappuccino
-        </button>
-
-        <button class="item latte" onclick="chooseItem('Latte')">
-          <span class="item-icon">🫖</span>Latte
-        </button>
-
-        <button class="item mocha" onclick="chooseItem('Mocha')">
-          <span class="item-icon">🍫</span>Mocha
-        </button>
-
-        <button class="item croissant" onclick="chooseItem('Croissant')">
-          <span class="item-icon">🥐</span>Croissant
-        </button>
-
-        <button class="item cheesecake" onclick="chooseItem('Cheesecake')">
-          <span class="item-icon">🍰</span>Cheesecake
-        </button>
-      </div>
-    </section>
-
-    <section id="gameOverScreen" class="screen hidden">
-      <div class="center">
-        <div class="big-icon">🏆</div>
-        <h1>GAME OVER</h1>
-
-        <div class="card">
-          <h2>FINAL SCORE</h2>
-          <div id="finalScore" class="final-score">0</div>
-          <p>Orders completed: <b id="finalOrders">0</b></p>
-        </div>
-
-        <button class="again-button" onclick="startGame()">PLAY AGAIN</button>
-      </div>
-    </section>
-  </main>
-
-  
 <script src="script.js"></script>
 </body>
 </html>
