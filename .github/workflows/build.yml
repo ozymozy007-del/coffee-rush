@@ -33,7 +33,9 @@ jobs:
           distribution: temurin
           java-version: '17'
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
+        with:
+          packages: platform-tools
       - name: Install Android platform
         run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
       - name: Set up Gradle
@@ -47,3 +49,4 @@ jobs:
         with:
           name: taco-rush-android-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
+
