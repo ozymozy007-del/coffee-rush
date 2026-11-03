@@ -1,0 +1,49 @@
+name: Build Taco Rush
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build game
+        run: node tools/build.mjs
+      - name: Check gameplay flow
+        run: node tools/smoke-check.mjs
+      - name: Upload playable game
+        uses: actions/upload-artifact@v4
+        with:
+          name: taco-rush-web
+          path: dist/index.html
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+      - name: Install Android platform
+        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+      - name: Build Android APK
+        run: gradle --no-daemon -p android :app:assembleDebug
+      - name: Upload Android APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: taco-rush-android-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
